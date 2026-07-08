@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<h2 class="mb-4">☕ Hệ thống quản lý PolyCafe</h2>
+
+<div class="alert alert-success">
+    Xin chào <strong>@ViewBag.HoTen</strong>
+</div>
+
+<div class="row">
+
+    <div class="col-md-3">
+        <div class="card text-center border-primary mb-3">
+            <div class="card-body">
+                <h5>Sản phẩm</h5>
+                <h2>@ViewBag.SoSanPham</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center border-success mb-3">
+            <div class="card-body">
+                <h5>Khách hàng</h5>
+                <h2>@ViewBag.SoKhachHang</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center border-warning mb-3">
+            <div class="card-body">
+                <h5>Nhân viên</h5>
+                <h2>@ViewBag.SoNhanVien</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center border-danger mb-3">
+            <div class="card-body">
+                <h5>Phiếu bán</h5>
+                <h2>@ViewBag.SoPhieuBan</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
