@@ -40,6 +40,19 @@ public class SanPhamsController : Controller
 
         return View(await ds.ToListAsync());
     }
+    public async Task<IActionResult> TimKiem(string? timkiem)
+    {
+        var ds = _context.SanPhams
+            .Include(x => x.MaLoaiNavigation)
+            .AsQueryable();
+
+        if (!string.IsNullOrEmpty(timkiem))
+        {
+            ds = ds.Where(x => x.TenSanPham.Contains(timkiem));
+        }
+
+        return PartialView("_PhanBangSanPham", await ds.ToListAsync());
+    }
 
     // GET: SANPHAMS/Details/5
     public async Task<IActionResult> Details(string? masanpham)
