@@ -20,12 +20,13 @@ namespace WebCafePoly.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+            ViewBag.Email = Request.Cookies["Email"];
             return View();
         }
 
         // POST
         [HttpPost]
-        public IActionResult Login(string email, string matkhau)
+        public IActionResult Login(string email, string matkhau, bool remember)
         {
             var nv = _context.NhanViens.FirstOrDefault(x =>
                 x.Email == email &&
@@ -41,10 +42,25 @@ namespace WebCafePoly.Controllers
             HttpContext.Session.SetString("MaNhanVien", nv.MaNhanVien);
             HttpContext.Session.SetString("HoTen", nv.HoTen);
             HttpContext.Session.SetString("VaiTro", nv.VaiTro.ToString());
+            if (remember)
+            {
+                CookieOptions options = new CookieOptions
+                {
+                    Expires = DateTime.Now.AddDays(30)
+                };
+
+                Response.Cookies.Append("Email", email, options);
+            }
+            else
+            {
+                Response.Cookies.Delete("Email");
+            }
 
             // Chuyển về trang chủ
             return RedirectToAction("Index", "Home");
             //return View();
+            ///đoạn kiểm tra đăng nhập và lưu thông tin đăng nhập
+            //return Content($"Remember = {remember}, Email = {email}");
 
         }
         public IActionResult DangXuat()
