@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebCafePoly.Models;
 
+
 public class LoaiSanPhamsController : Controller
 {
     private readonly PolyCafeContext _context;
@@ -57,8 +58,14 @@ public class LoaiSanPhamsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("MaLoai,TenLoai,GhiChu,SanPhams")] LoaiSanPham loaisanpham)
+    public async Task<IActionResult> Create([Bind("MaLoai,TenLoai,GhiChu")] LoaiSanPham loaisanpham)
     {
+        if (_context.LoaiSanPhams.Any(x => x.MaLoai == loaisanpham.MaLoai))
+        {
+            ModelState.AddModelError("MaLoai",
+                "Mã loại sản phẩm bạn vừa nhập đã có trên hệ thống.");
+        }
+
         if (ModelState.IsValid)
         {
             _context.Add(loaisanpham);
@@ -89,7 +96,7 @@ public class LoaiSanPhamsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(string? maloai, [Bind("MaLoai,TenLoai,GhiChu,SanPhams")] LoaiSanPham loaisanpham)
+    public async Task<IActionResult> Edit(string? maloai, [Bind("MaLoai,TenLoai,GhiChu")] LoaiSanPham loaisanpham)
     {
         if (maloai != loaisanpham.MaLoai)
         {
