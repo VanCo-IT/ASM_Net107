@@ -44,16 +44,17 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="TrangThai" class="control-label"></label>
-                <input asp-for="TrangThai" class="form-check-input" />
-                <span asp-validation-for="TrangThai" class="text-danger"></span>
+
+                <p>
+                    @typeof(WebCafePoly.Models.KhachHang)
+                    .GetProperty("TrangThai")
+                    ?.PropertyType.FullName
+                </p>
+
+                <input asp-for="TrangThai" />
+
             </div>
 
-            <div class="form-group">
-                <label asp-for="PhieuBanHangs" class="control-label"></label>
-                <input asp-for="PhieuBanHangs" class="form-control" />
-                <span asp-validation-for="PhieuBanHangs" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

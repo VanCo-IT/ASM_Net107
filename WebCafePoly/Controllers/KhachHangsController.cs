@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebCafePoly.Models;
 
+
 public class KhachHangsController : Controller
 {
     private readonly PolyCafeContext _context;
@@ -57,8 +58,26 @@ public class KhachHangsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("MaKhachHang,HoTen,Email,SoDienThoai,MatKhau,DiaChi,TrangThai,PhieuBanHangs")] KhachHang khachhang)
+    public async Task<IActionResult> Create([Bind("HoTen,Email,SoDienThoai,MatKhau,DiaChi,TrangThai")] KhachHang khachhang)
     {
+        // Lấy khách hàng có mã lớn nhất
+        var khCuoi = await _context.KhachHangs
+            .OrderByDescending(x => x.MaKhachHang)
+            .FirstOrDefaultAsync();
+
+        string maMoi = "KH001";
+
+        if (khCuoi != null)
+        {
+            int so = 0;
+            int.TryParse(khCuoi.MaKhachHang.Substring(2), out so);
+            maMoi = "KH" + (so + 1).ToString("D3");
+        }
+
+        khachhang.MaKhachHang = maMoi;
+
+        // Xóa lỗi validation của MaKhachHang vì hệ thống tự sinh
+        ModelState.Remove("MaKhachHang");
         if (ModelState.IsValid)
         {
             _context.Add(khachhang);
@@ -89,7 +108,7 @@ public class KhachHangsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(string? makhachhang, [Bind("MaKhachHang,HoTen,Email,SoDienThoai,MatKhau,DiaChi,TrangThai,PhieuBanHangs")] KhachHang khachhang)
+    public async Task<IActionResult> Edit(string? makhachhang, [Bind("MaKhachHang,HoTen,Email,SoDienThoai,MatKhau,DiaChi,TrangThai")] KhachHang khachhang)
     {
         if (makhachhang != khachhang.MaKhachHang)
         {
