@@ -13,15 +13,23 @@ public partial class NhanVien
     [Key]
     [StringLength(6)]
     [Unicode(false)]
+    [Display(Name = "Mã nhân viên")]
+    [Required(ErrorMessage = "Không được để trống mã nhân viên")]
     public string MaNhanVien { get; set; } = null!;
 
     [StringLength(100)]
+    [Display(Name = "Họ tên")]
+    [Required(ErrorMessage = "Không được để trống họ tên")]
     public string HoTen { get; set; } = null!;
 
     [StringLength(255)]
+    [Display(Name = "Email")]
+    [Required(ErrorMessage = "Không được để trống email")]
     public string Email { get; set; } = null!;
 
     [StringLength(255)]
+    [Display(Name = "Mật khẩu")]
+    [Required(ErrorMessage = "Không được để trống mật khẩu")]
     public string MatKhau { get; set; } = null!;
 
     public bool VaiTro { get; set; }
