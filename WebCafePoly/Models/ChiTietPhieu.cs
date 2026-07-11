@@ -14,15 +14,23 @@ public partial class ChiTietPhieu
 
     [StringLength(6)]
     [Unicode(false)]
+    [Display(Name = "Mã phiếu")]
+    [Required(ErrorMessage = "Không được để trống mã phiếu")]
     public string MaPhieu { get; set; } = null!;
 
     [StringLength(6)]
     [Unicode(false)]
+    [Display(Name = "Mã sản phẩm")]
+    [Required(ErrorMessage = "Không được để trống mã phẩm")]
     public string MaSanPham { get; set; } = null!;
 
+    [Display(Name = "Số lượng")]
+    [Required(ErrorMessage = "Không được để trống số lượng")]
     public int SoLuong { get; set; }
 
     [Column(TypeName = "decimal(10, 0)")]
+    [Display(Name = "Đơn giá")]
+    [Required(ErrorMessage = "Không được để trống đơn giá")]
     public decimal DonGia { get; set; }
 
     [ForeignKey("MaPhieu")]
