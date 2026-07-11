@@ -12,9 +12,13 @@ public partial class TheLuuDong
     [Key]
     [StringLength(6)]
     [Unicode(false)]
+    [Display(Name = "Mã thẻ")]
+    [Required(ErrorMessage = "Không được để trống mã thẻ")]
     public string MaThe { get; set; } = null!;
 
     [StringLength(100)]
+    [Display(Name = "Chủ sỡ hữu")]
+    [Required(ErrorMessage = "Không được để trống chủ sỡ hữu")]
     public string ChuSoHuu { get; set; } = null!;
 
     public bool TrangThai { get; set; }
