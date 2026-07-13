@@ -1,0 +1,99 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@model IEnumerable<WebCafePoly.Models.SanPham>
+
+@{
+    ViewData["Title"] = "Thực đơn";
+}
+<a asp-controller="GuestAccount"
+   asp-action="DangKy"
+   class="btn btn-success">
+    Đăng ký
+</a>
+
+<h2>Danh sách món ăn</h2>
+
+<form asp-action="Index" method="get" class="row g-3 mb-3">
+
+    <div class="col-md-3">
+        <input type="text"
+               name="keyword"
+               class="form-control"
+               placeholder="Tên món"
+               value="@ViewBag.Keyword" />
+    </div>
+
+    <div class="col-md-3">
+        <select name="maLoai"
+                class="form-select"
+                asp-items="@(new SelectList(ViewBag.LoaiSanPham, "MaLoai", "TenLoai", ViewBag.MaLoai))">
+            <option value="">-- Tất cả loại --</option>
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <input type="number"
+               name="giaTu"
+               class="form-control"
+               placeholder="Giá tối thiểu"
+               value="@ViewBag.GiaTu" />
+    </div>
+
+    <div class="col-md-2">
+        <input type="number"
+               name="giaDen"
+               class="form-control"
+               placeholder="Giá tối đa"
+               value="@ViewBag.GiaDen" />
+    </div>
+
+    <div class="col-md-2">
+        <button class="btn btn-primary w-100">
+            Tìm kiếm
+        </button>
+    </div>
+
+</form>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Hình</th>
+            <th>Tên món</th>
+            <th>Loại</th>
+            <th>Đơn giá</th>
+            <th>Trạng thái</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~/images/products/@item.HinhAnh"
+                         width="80"
+                         alt="@item.TenSanPham" />
+                </td>
+
+                <td>@item.TenSanPham</td>
+
+                <td>@item.MaLoaiNavigation.TenLoai</td>
+
+                <td>@String.Format("{0:N0} VNĐ", item.DonGia)</td>
+
+                <td>
+                    @(item.TrangThai ? "Đang bán" : "Ngừng bán")
+                </td>
+
+                <td>
+                    <a asp-action="ChiTiet"
+                       asp-route-id="@item.MaSanPham"
+                       class="btn btn-primary btn-sm">
+                        Xem chi tiết
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
