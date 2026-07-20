@@ -17,6 +17,17 @@ namespace WebCafePoly.Controllers
         {
             return View();
         }
+        // GET
+        public IActionResult DangNhap()
+        {
+            if (HttpContext.Session.GetString("MaKhachHang") != null)
+            {
+                return RedirectToAction("HoSoKhachHang", "Customer");
+            }
+
+            ViewBag.Email = Request.Cookies["Email"];
+            return View();
+        }
         private string TaoMaKhachHang()
         {
             var maCuoi = _context.KhachHangs
@@ -31,6 +42,7 @@ namespace WebCafePoly.Controllers
 
             return $"KH{(so + 1):D3}";
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DangKy(KhachHang khachHang)
@@ -69,6 +81,48 @@ namespace WebCafePoly.Controllers
             // Thông báo thành công
             return Content("Đăng ký thành công");
 
+        }
+
+        // POST
+        [HttpPost]
+        public IActionResult DangNhap(string email, string matKhau, bool remember)
+        {
+            var kh = _context.KhachHangs.FirstOrDefault(x =>
+                x.Email == email &&
+                x.MatKhau == matKhau &&
+                x.TrangThai == true);
+
+            if (kh == null)
+            {
+                ViewBag.Loi = "Sai email hoặc mật khẩu";
+                return View();
+            }
+
+            HttpContext.Session.SetString("MaKhachHang", kh.MaKhachHang);
+            HttpContext.Session.SetString("HoTenKhachHang", kh.HoTen);
+
+            if (remember)
+            {
+                CookieOptions options = new CookieOptions
+                {
+                    Expires = DateTime.Now.AddDays(30)
+                };
+
+                Response.Cookies.Append("Email", email, options);
+            }
+            else
+            {
+                Response.Cookies.Delete("Email");
+            }
+
+            return RedirectToAction("HoSoKhachHang", "Customer");
+        }
+        public IActionResult DangXuat()
+        {
+            HttpContext.Session.Remove("MaKhachHang");
+            HttpContext.Session.Remove("HoTenKhachHang");
+
+            return RedirectToAction("DangNhap");
         }
     }
 }
