@@ -2,6 +2,7 @@
 using WebCafePoly.Models;
 using System.Text.Json;
 using WebCafePoly.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebCafePoly.Controllers
 {
@@ -216,6 +217,17 @@ namespace WebCafePoly.Controllers
             HttpContext.Session.Remove("GioHang");
 
             return RedirectToAction("GioHang");
+        }
+        public IActionResult LichSuDonHang()
+        {
+            string maKH = HttpContext.Session.GetString("MaKhachHang");
+
+            var ds = _context.PhieuBanHangs
+                .Where(x => x.MaKhachHang == maKH)
+                .OrderByDescending(x => x.NgayTao)
+                .ToList();
+
+            return View(ds);
         }
     }
 }
