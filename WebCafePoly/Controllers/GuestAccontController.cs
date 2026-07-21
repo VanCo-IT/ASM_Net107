@@ -115,7 +115,7 @@ namespace WebCafePoly.Controllers
                 Response.Cookies.Delete("Email");
             }
 
-            return RedirectToAction("HoSoKhachHang", "Customer");
+            return RedirectToAction("Index", "Guest");
         }
         public IActionResult DangXuat()
         {

@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebCafePoly.Models;
+using System.Text.Json;
+using WebCafePoly.Extensions;
+
 namespace WebCafePoly.Controllers
 {
     public class CustomerController : Controller
@@ -68,6 +71,151 @@ namespace WebCafePoly.Controllers
             ViewBag.ThongBao = "Cập nhật thành công";
 
             return View(kh);
+        }
+        public IActionResult ThemVaoGio(string id)
+        {
+            var sanPham = _context.SanPhams.FirstOrDefault(x => x.MaSanPham == id);
+
+            if (sanPham == null)
+            {
+                return NotFound();
+            }
+
+            var gioHang = HttpContext.Session.GetObject<List<GioHang>>("GioHang");
+
+            if (gioHang == null)
+            {
+                gioHang = new List<GioHang>();
+            }
+
+            var item = gioHang.FirstOrDefault(x => x.MaSanPham == id);
+
+            if (item == null)
+            {
+                gioHang.Add(new GioHang
+                {
+                    MaSanPham = sanPham.MaSanPham,
+                    TenSanPham = sanPham.TenSanPham,
+                    DonGia = sanPham.DonGia,
+                    SoLuong = 1,
+                    HinhAnh = sanPham.HinhAnh
+                });
+            }
+            else
+            {
+                item.SoLuong++;
+            }
+
+            HttpContext.Session.SetObject("GioHang", gioHang);
+
+            return RedirectToAction("GioHang");
+        }
+        public IActionResult GioHang()
+        {
+            var gioHang = HttpContext.Session.GetObject<List<GioHang>>("GioHang");
+
+            if (gioHang == null)
+            {
+                gioHang = new List<GioHang>();
+            }
+
+            return View(gioHang);
+        }
+        public IActionResult TangSoLuong(string id)
+        {
+            var gioHang = HttpContext.Session.GetObject<List<GioHang>>("GioHang");
+
+            if (gioHang != null)
+            {
+                var item = gioHang.FirstOrDefault(x => x.MaSanPham == id);
+
+                if (item != null)
+                {
+                    item.SoLuong++;
+                }
+
+                HttpContext.Session.SetObject("GioHang", gioHang);
+            }
+
+            return RedirectToAction("GioHang");
+        }
+        public IActionResult GiamSoLuong(string id)
+        {
+            var gioHang = HttpContext.Session.GetObject<List<GioHang>>("GioHang");
+
+            if (gioHang != null)
+            {
+                var item = gioHang.FirstOrDefault(x => x.MaSanPham == id);
+
+                if (item != null)
+                {
+                    item.SoLuong--;
+
+                    if (item.SoLuong <= 0)
+                    {
+                        gioHang.Remove(item);
+                    }
+                }
+
+                HttpContext.Session.SetObject("GioHang", gioHang);
+            }
+
+            return RedirectToAction("GioHang");
+        }
+        private string TaoMaPhieu()
+        {
+            var maCuoi = _context.PhieuBanHangs
+                .OrderByDescending(x => x.MaPhieu)
+                .Select(x => x.MaPhieu)
+                .FirstOrDefault();
+
+            if (string.IsNullOrEmpty(maCuoi))
+                return "PBH001";
+
+            int so = int.Parse(maCuoi.Substring(3));
+
+            return $"PBH{(so + 1):D3}";
+        }
+        public IActionResult ThanhToan()
+        {
+            var gioHang = HttpContext.Session.GetObject<List<GioHang>>("GioHang");
+
+            if (gioHang == null || !gioHang.Any())
+            {
+                return RedirectToAction("GioHang");
+            }
+
+            string maPhieu = TaoMaPhieu();
+
+            var phieu = new PhieuBanHang
+            {
+                MaPhieu = maPhieu,
+                MaKhachHang = HttpContext.Session.GetString("MaKhachHang"),
+                MaNhanVien = "NV001",
+                MaThe = "THE001",
+                NgayTao = DateTime.Now,
+                TrangThai = true
+            };
+
+            _context.PhieuBanHangs.Add(phieu);
+            foreach (var item in gioHang)
+            {
+                ChiTietPhieu ct = new ChiTietPhieu
+                {
+                    MaPhieu = maPhieu,
+                    MaSanPham = item.MaSanPham,
+                    SoLuong = item.SoLuong,
+                    DonGia = item.DonGia
+                };
+
+                _context.ChiTietPhieus.Add(ct);
+            }
+
+            _context.SaveChanges();
+
+            HttpContext.Session.Remove("GioHang");
+
+            return RedirectToAction("GioHang");
         }
     }
 }

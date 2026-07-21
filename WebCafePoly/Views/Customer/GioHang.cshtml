@@ -1,0 +1,50 @@
+﻿@model List<WebCafePoly.Models.GioHang>
+
+<h2>Giỏ hàng</h2>
+
+@if (!Model.Any())
+{
+    <p>Chưa có sản phẩm.</p>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>Tên</th>
+            <th>Giá</th>
+            <th>SL</th>
+            <th>Thành tiền</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.TenSanPham</td>
+                <td>@item.DonGia</td>
+
+                <td>
+                    <a asp-action="GiamSoLuong"
+                       asp-route-id="@item.MaSanPham"
+                       class="btn btn-warning btn-sm">-</a>
+
+                    @item.SoLuong
+
+                    <a asp-action="TangSoLuong"
+                       asp-route-id="@item.MaSanPham"
+                       class="btn btn-success btn-sm">+</a>
+                </td>
+
+                <td>@item.ThanhTien</td>
+            </tr>
+        }
+    </table>
+    <h4>
+        Tổng tiền:
+        @Model.Sum(x => x.ThanhTien).ToString("N0") VNĐ
+    </h4>
+
+    <a asp-action="ThanhToan"
+       class="btn btn-primary">
+        Thanh toán
+    </a>
+}

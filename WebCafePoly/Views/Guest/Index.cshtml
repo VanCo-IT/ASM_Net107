@@ -92,6 +92,13 @@
                        class="btn btn-primary btn-sm">
                         Xem chi tiết
                     </a>
+
+                    <a asp-controller="Customer"
+                       asp-action="ThemVaoGio"
+                       asp-route-id="@item.MaSanPham"
+                       class="btn btn-success btn-sm">
+                        Đặt món
+                    </a>
                 </td>
             </tr>
         }
