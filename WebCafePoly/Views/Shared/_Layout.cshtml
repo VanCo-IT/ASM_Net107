@@ -62,20 +62,123 @@
                                 Chi tiết phiếu
                             </a>
                         </li>
+
+                        @* Nhân viên *@
                         @if (Context.Session.GetString("HoTen") != null)
                         {
-                            <li class="nav-item ms-auto">
-                                <span class="nav-link">
-                                    Xin chào: @Context.Session.GetString("HoTen")
-                                </span>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-warning"
-                                   asp-controller="DangNhap"
-                                   asp-action="DangXuat">
-                                    Đăng xuất
+                            <li class="nav-item dropdown ms-auto">
+                                <a class="nav-link dropdown-toggle"
+                                   href="#"
+                                   role="button"
+                                   data-bs-toggle="dropdown">
+                                    @Context.Session.GetString("HoTen")
                                 </a>
+
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item"
+                                           asp-controller="Home"
+                                           asp-action="Index">
+                                            Trang quản trị
+                                        </a>
+                                    </li>
+
+                                    <li><hr class="dropdown-divider"></li>
+
+                                    <li>
+                                        <a class="dropdown-item text-danger"
+                                           asp-controller="DangNhap"
+                                           asp-action="DangXuat">
+                                            Đăng xuất
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        else if (Context.Session.GetString("HoTenKhachHang") != null)
+                        {
+                            <li class="nav-item dropdown ms-auto">
+                                <a class="nav-link dropdown-toggle"
+                                   href="#"
+                                   role="button"
+                                   data-bs-toggle="dropdown">
+                                    @Context.Session.GetString("HoTenKhachHang")
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item"
+                                           asp-controller="Customer"
+                                           asp-action="HoSoKhachHang">
+                                            Hồ sơ
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item"
+                                           asp-controller="Customer"
+                                           asp-action="GioHang">
+                                            Giỏ hàng
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item"
+                                           asp-controller="Customer"
+                                           asp-action="LichSuDonHang">
+                                            Lịch sử đơn hàng
+                                        </a>
+                                    </li>
+
+                                    <li><hr class="dropdown-divider"></li>
+
+                                    <li>
+                                        <a class="dropdown-item text-danger"
+                                           asp-controller="GuestAccount"
+                                           asp-action="DangXuat">
+                                            Đăng xuất
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item dropdown ms-auto">
+                                <a class="nav-link dropdown-toggle"
+                                   href="#"
+                                   role="button"
+                                   data-bs-toggle="dropdown">
+                                    Tài khoản
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item"
+                                           asp-controller="GuestAccount"
+                                           asp-action="DangKy">
+                                            Đăng ký khách hàng
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item"
+                                           asp-controller="GuestAccount"
+                                           asp-action="DangNhap">
+                                            Đăng nhập khách hàng
+                                        </a>
+                                    </li>
+
+                                    <li><hr class="dropdown-divider"></li>
+
+                                    <li>
+                                        <a class="dropdown-item"
+                                           asp-controller="DangNhap"
+                                           asp-action="Login">
+                                            Đăng nhập nhân viên
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                         }
 
