@@ -18,10 +18,8 @@
                 <td>@item.NgayTao</td>
                 <td>@(item.TrangThai ? "Đã thanh toán" : "Chưa thanh toán")</td>
                 <td>
-                    <a asp-action="ChiTietHoaDon"
-                       asp-route-id="@item.MaPhieu"
-                       class="btn btn-primary">
-                        Chi tiết
+                    <a href="/Customer/ChiTietHoaDon?id=@item.MaPhieu">
+                        Test Chi tiết
                     </a>
                 </td>
             </tr>

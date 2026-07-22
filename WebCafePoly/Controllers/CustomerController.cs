@@ -229,5 +229,20 @@ namespace WebCafePoly.Controllers
 
             return View(ds);
         }
+        public IActionResult ChiTietHoaDon(string id)
+        {
+            var chiTiet = _context.ChiTietPhieus
+                .Include(x => x.MaSanPhamNavigation)
+                .Include(x => x.MaPhieuNavigation)
+                .Where(x => x.MaPhieu == id)
+                .ToList();
+
+            if (!chiTiet.Any())
+            {
+                return NotFound();
+            }
+
+            return View(chiTiet);
+        }
     }
 }
