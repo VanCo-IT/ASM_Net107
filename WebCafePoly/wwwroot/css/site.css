@@ -1,7 +1,3 @@
-/* ================================
-   GLOBAL
-================================ */
-
 html {
     font-size: 14px;
     position: relative;
@@ -22,9 +18,7 @@ body {
 }
 
 
-/* ================================
-   HEADER
-================================ */
+/* HEADER */
 
 .admin-header {
     background: #24150f;
@@ -58,9 +52,7 @@ body {
 }
 
 
-/* ================================
-   NAVIGATION
-================================ */
+/* NAVIGATION */
 
 .admin-header .nav-link {
     color: rgba(255, 255, 255, 0.78) !important;
@@ -80,9 +72,7 @@ body {
 }
 
 
-/* ================================
-   ACCOUNT
-================================ */
+/* ACCOUNT */
 
 .account-button {
     display: flex;
@@ -123,9 +113,7 @@ body {
 }
 
 
-/* ================================
-   MAIN
-================================ */
+/* MAIN */
 
 .admin-main {
     min-height: calc(100vh - 130px);
@@ -136,9 +124,7 @@ body {
 }
 
 
-/* ================================
-   COMMON BOOTSTRAP IMPROVEMENTS
-================================ */
+/* BOOTSTRAP */
 
 .card {
     border: 0;
@@ -171,9 +157,7 @@ body {
 }
 
 
-/* ================================
-   FOOTER
-================================ */
+/* FOOTER */
 
 .admin-footer {
     background: #fff;
@@ -190,9 +174,7 @@ body {
 }
 
 
-/* ================================
-   FOCUS
-================================ */
+/* FOCUS */
 
 .btn:focus,
 .btn:active:focus,
@@ -203,9 +185,7 @@ body {
 }
 
 
-/* ================================
-   RESPONSIVE
-================================ */
+/* RESPONSIVE */
 
 @media (max-width: 991px) {
 
@@ -225,6 +205,257 @@ body {
     .footer-content {
         flex-direction: column;
         gap: 5px;
+        align-items: flex-start;
+    }
+}
+
+
+/* ADMIN DASHBOARD */
+
+.admin-dashboard {
+    padding-bottom: 30px;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.dashboard-header h1 {
+    margin: 0 0 6px;
+    font-size: 30px;
+    font-weight: 700;
+    color: #24150f;
+}
+
+.dashboard-header p {
+    margin: 0;
+    color: #777;
+}
+
+.dashboard-date {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: #fff;
+    border-radius: 10px;
+    color: #6d4c41;
+    font-weight: 600;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+}
+
+
+/* STATISTICS */
+
+.dashboard-card {
+    position: relative;
+    min-height: 150px;
+    padding: 22px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.09);
+}
+
+.dashboard-card-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 23px;
+    margin-bottom: 14px;
+}
+
+.product-icon {
+    background: #f5e8dd;
+}
+
+.customer-icon {
+    background: #e5f2eb;
+}
+
+.employee-icon {
+    background: #eee8f7;
+}
+
+.invoice-icon {
+    background: #f8edd7;
+}
+
+.dashboard-card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-card-content span {
+    color: #777;
+    font-size: 14px;
+}
+
+.dashboard-card-content strong {
+    margin-top: 3px;
+    color: #24150f;
+    font-size: 28px;
+    line-height: 1.2;
+}
+
+.dashboard-card-link {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    color: #8b5e3c;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.dashboard-card-link:hover {
+    color: #5d3b25;
+}
+
+
+/* SECTION */
+
+.dashboard-section {
+    padding: 25px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.section-heading {
+    margin-bottom: 20px;
+}
+
+.section-heading h3 {
+    margin: 0 0 4px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #24150f;
+}
+
+.section-heading p {
+    margin: 0;
+    color: #888;
+    font-size: 14px;
+}
+
+
+/* QUICK ACTION */
+
+.quick-action {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    height: 75px;
+    padding: 12px 15px;
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 11px;
+    color: #252525;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.quick-action:hover {
+    background: #f6f1ed;
+    border-color: #e3d3c6;
+    color: #24150f;
+    transform: translateY(-2px);
+}
+
+.quick-action-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #ead8c8;
+    color: #6d4225;
+    font-size: 24px;
+}
+
+.quick-action span:last-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.quick-action strong {
+    font-size: 14px;
+}
+
+.quick-action small {
+    margin-top: 3px;
+    color: #888;
+    font-size: 12px;
+}
+
+
+/* INFORMATION */
+
+.dashboard-info {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-top: 25px;
+    padding: 22px 25px;
+    background: #24150f;
+    border-radius: 15px;
+    color: #fff;
+}
+
+.dashboard-info-icon {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    font-size: 25px;
+}
+
+.dashboard-info h4 {
+    margin: 0 0 5px;
+    font-size: 17px;
+}
+
+.dashboard-info p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+}
+
+
+/* DASHBOARD RESPONSIVE */
+
+@media (max-width: 767px) {
+
+    .dashboard-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 25px;
+    }
+
+    .dashboard-info {
         align-items: flex-start;
     }
 }
