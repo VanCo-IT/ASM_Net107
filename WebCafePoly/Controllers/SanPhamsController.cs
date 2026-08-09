@@ -87,14 +87,6 @@ public class SanPhamsController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("MaSanPham,TenSanPham,DonGia,MaLoai,HinhAnh,TrangThai")] SanPham sanpham)
     {
-        //code này để tìm lỗi
-        //Console.WriteLine(ModelState.IsValid);
-        //if (!ModelState.IsValid)
-        //{
-        //    return Content(string.Join("\n",
-        //        ModelState.SelectMany(x =>
-        //            x.Value.Errors.Select(e => $"{x.Key}: {e.ErrorMessage}"))));
-        //}
         if (ModelState.IsValid)
         {
             _context.Add(sanpham);
