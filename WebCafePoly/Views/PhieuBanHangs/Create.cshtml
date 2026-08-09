@@ -8,10 +8,17 @@
 
 <h4>PhieuBanHang</h4>
 <hr />
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="MaPhieu" class="control-label"></label>
+                <input asp-for="MaPhieu" class="form-control" />
+                <span asp-validation-for="MaPhieu" class="text-danger"></span>
+            </div>
 
             <div class="form-group">
                 <label asp-for="MaKhachHang" class="control-label"></label>
@@ -43,36 +50,13 @@
                 <span asp-validation-for="TrangThai" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="ChiTietPhieus" class="control-label"></label>
-                <input asp-for="ChiTietPhieus" class="form-control" />
-                <span asp-validation-for="ChiTietPhieus" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="MaKhachHangNavigation" class="control-label"></label>
-                <input asp-for="MaKhachHangNavigation" class="form-control" />
-                <span asp-validation-for="MaKhachHangNavigation" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="MaNhanVienNavigation" class="control-label"></label>
-                <input asp-for="MaNhanVienNavigation" class="form-control" />
-                <span asp-validation-for="MaNhanVienNavigation" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="MaTheNavigation" class="control-label"></label>
-                <input asp-for="MaTheNavigation" class="form-control" />
-                <span asp-validation-for="MaTheNavigation" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            <div class="form-group mt-2">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

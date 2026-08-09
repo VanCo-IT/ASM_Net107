@@ -56,8 +56,12 @@ public class PhieuBanHangsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("MaPhieu,MaKhachHang,MaThe,MaNhanVien,NgayTao,TrangThai,ChiTietPhieus,MaKhachHangNavigation,MaNhanVienNavigation,MaTheNavigation")] PhieuBanHang phieubanhang)
+    public async Task<IActionResult> Create([Bind("MaPhieu,MaKhachHang,MaThe,MaNhanVien,NgayTao,TrangThai")] PhieuBanHang phieubanhang)
     {
+        if (await _context.PhieuBanHangs.AnyAsync(x => x.MaPhieu == phieubanhang.MaPhieu))
+        {
+            ModelState.AddModelError("MaPhieu", "Mã phiếu này đã tồn tại trên hệ thống.");
+        }
         if (ModelState.IsValid)
         {
             _context.Add(phieubanhang);
@@ -88,7 +92,7 @@ public class PhieuBanHangsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(string? maphieu, [Bind("MaPhieu,MaKhachHang,MaThe,MaNhanVien,NgayTao,TrangThai,ChiTietPhieus,MaKhachHangNavigation,MaNhanVienNavigation,MaTheNavigation")] PhieuBanHang phieubanhang)
+    public async Task<IActionResult> Edit(string? maphieu, [Bind("MaPhieu,MaKhachHang,MaThe,MaNhanVien,NgayTao,TrangThai")] PhieuBanHang phieubanhang)
     {
         if (maphieu != phieubanhang.MaPhieu)
         {

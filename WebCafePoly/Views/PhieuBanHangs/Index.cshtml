@@ -4,14 +4,18 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Danh sách phiếu bán hàng</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaPhieu)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.MaKhachHang)
             </th>
@@ -27,57 +31,38 @@
             <th>
                 @Html.DisplayNameFor(model => model.TrangThai)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ChiTietPhieus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaKhachHangNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaNhanVienNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaTheNavigation)
-            </th>
             <th></th>
         </tr>
     </thead>
+
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(model => item.MaKhachHang)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.MaThe)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.MaNhanVien)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.NgayTao)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.TrangThai)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.ChiTietPhieus)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.MaKhachHangNavigation)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.MaNhanVienNavigation)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.MaTheNavigation)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.MaPhieu">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MaPhieu">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MaPhieu">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaPhieu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaKhachHang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaThe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaNhanVien)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayTao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrangThai)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-maphieu="@item.MaPhieu">Edit</a> |
+                    <a asp-action="Details" asp-route-maphieu="@item.MaPhieu">Details</a> |
+                    <a asp-action="Delete" asp-route-maphieu="@item.MaPhieu">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
