@@ -405,3 +405,42 @@ body {
     margin: 30px auto 0;
     padding: 12px 25px;
 }
+
+.history-page {
+    min-height: 70vh;
+}
+
+.history-card {
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+}
+
+.history-table th {
+    color: #6f3e24;
+    border-bottom: 2px solid #eee2d8;
+}
+
+.history-table td {
+    padding: 18px 10px;
+}
+
+.order-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.order-status.paid {
+    background: #e2f3e9;
+    color: #198754;
+}
+
+.order-status.unpaid {
+    background: #fff3cd;
+    color: #856404;
+}
