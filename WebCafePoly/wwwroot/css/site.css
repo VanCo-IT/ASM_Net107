@@ -2146,3 +2146,337 @@ css
     }
 }
 
+/* =========================================
+   CHI TIET PHIEU ADMIN PAGE
+========================================= */
+
+.detail-invoice-page {
+    padding-bottom: 30px;
+}
+
+/* HEADER */
+
+.detail-invoice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    margin-bottom: 22px;
+}
+
+.detail-invoice-header h1 {
+    margin: 0 0 5px;
+    color: #24150f;
+    font-size: 29px;
+    font-weight: 700;
+}
+
+.detail-invoice-header p {
+    margin: 0;
+    color: #777;
+    font-size: 14px;
+}
+
+.btn-add-detail {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 11px 18px;
+    border: 0;
+    border-radius: 9px;
+    background: #6d4225;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(109, 66, 37, 0.18);
+    transition: 0.2s ease;
+}
+
+.btn-add-detail:hover {
+    background: #54311d;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.btn-add-detail span {
+    font-size: 19px;
+    line-height: 1;
+}
+
+/* SUMMARY */
+
+.detail-invoice-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.detail-summary-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 17px 20px;
+    background: #fff;
+    border-radius: 13px;
+    box-shadow: 0 3px 16px rgba(0, 0, 0, 0.05);
+}
+
+.detail-summary-icon {
+    width: 47px;
+    height: 47px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #f8edd7;
+    color: #8a6728;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.detail-summary-icon.product {
+    background: #f5e8dd;
+    color: #8b5e3c;
+}
+
+.detail-summary-icon.money {
+    background: #eaf7ef;
+    color: #267344;
+}
+
+.detail-summary-item > div:last-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-summary-item span {
+    color: #888;
+    font-size: 12px;
+}
+
+.detail-summary-item strong {
+    margin-top: 2px;
+    color: #24150f;
+    font-size: 22px;
+}
+
+/* CARD */
+
+.detail-invoice-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.detail-invoice-card-header {
+    padding: 20px 22px;
+    border-bottom: 1px solid #eee;
+}
+
+.detail-invoice-card-header h3 {
+    margin: 0 0 4px;
+    color: #24150f;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.detail-invoice-card-header p {
+    margin: 0;
+    color: #888;
+    font-size: 13px;
+}
+
+/* TABLE */
+
+.detail-invoice-table {
+    margin: 0;
+}
+
+.detail-invoice-table thead th {
+    padding: 15px 18px;
+    border-bottom: 1px solid #e6e6e6;
+    background: #faf9f8;
+    color: #6d6d6d;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.detail-invoice-table tbody td {
+    padding: 15px 18px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+}
+
+.detail-invoice-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.detail-invoice-table tbody tr {
+    transition: background 0.15s ease;
+}
+
+.detail-invoice-table tbody tr:hover {
+    background: #fcfaf8;
+}
+
+/* ID */
+
+.detail-id {
+    color: #aaa;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* CODES */
+
+.detail-code {
+    display: inline-flex;
+    padding: 6px 9px;
+    border-radius: 7px;
+    background: #f7f5f3;
+    color: #6d4225;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* PRODUCT */
+
+.detail-product-cell {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 160px;
+}
+
+.detail-product-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #f5e8dd;
+    color: #8b5e3c;
+    font-size: 18px;
+}
+
+.detail-product-cell strong {
+    display: block;
+    color: #292929;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.detail-product-cell small {
+    display: block;
+    margin-top: 2px;
+    color: #999;
+    font-size: 11px;
+}
+
+/* QUANTITY */
+
+.detail-quantity {
+    display: inline-flex;
+    min-width: 36px;
+    justify-content: center;
+    padding: 5px 9px;
+    border-radius: 7px;
+    background: #f7f7f7;
+    color: #444;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* PRICE */
+
+.detail-price {
+    color: #555;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.detail-total {
+    color: #6d4225;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+/* ACTIONS */
+
+.detail-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.detail-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 45px;
+    padding: 6px 9px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.15s ease;
+}
+
+.detail-edit {
+    background: #f8f0df;
+    color: #8a6728;
+}
+
+.detail-edit:hover {
+    background: #f0e4c9;
+    color: #72531d;
+}
+
+.detail-view {
+    background: #edf3f8;
+    color: #42677f;
+}
+
+.detail-view:hover {
+    background: #dfeaf2;
+    color: #31556d;
+}
+
+.detail-delete {
+    background: #f8eaea;
+    color: #a34d4d;
+}
+
+.detail-delete:hover {
+    background: #f2dcdc;
+    color: #893b3b;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 991px) {
+
+    .detail-invoice-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .btn-add-detail {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .detail-invoice-summary {
+        grid-template-columns: 1fr;
+    }
+}
