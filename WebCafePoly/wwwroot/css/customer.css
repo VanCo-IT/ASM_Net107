@@ -444,3 +444,51 @@ body {
     background: #fff3cd;
     color: #856404;
 }
+
+.auth-page {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+}
+
+.auth-card {
+    max-width: 450px;
+    margin: auto;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+}
+
+.auth-icon {
+    font-size: 65px;
+    color: #7b4528;
+}
+
+.auth-card h1 {
+    margin-top: 10px;
+    color: #6f3e24;
+    font-weight: 800;
+}
+
+.auth-card > p {
+    color: #8a756a;
+    margin-bottom: 30px;
+}
+
+.auth-card .form-control {
+    border-radius: 10px;
+    padding: 11px 14px;
+}
+
+.auth-footer {
+    margin-top: 20px;
+    color: #8a756a;
+}
+
+.auth-footer a {
+    color: #7b4528;
+    font-weight: 700;
+    text-decoration: none;
+}
