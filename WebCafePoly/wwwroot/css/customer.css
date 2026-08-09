@@ -360,3 +360,48 @@ body {
     margin-top: 15px;
     color: #6f3e24;
 }
+
+.profile-page {
+    min-height: 70vh;
+}
+
+.profile-card {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+}
+
+.profile-icon {
+    text-align: center;
+    font-size: 70px;
+    color: #7b4528;
+    margin-bottom: 25px;
+}
+
+.profile-card .form-control {
+    border-radius: 10px;
+    padding: 11px 14px;
+}
+
+.password-box {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 0;
+    background: transparent;
+    color: #7b4528;
+}
+
+.profile-submit {
+    display: block;
+    margin: 30px auto 0;
+    padding: 12px 25px;
+}
