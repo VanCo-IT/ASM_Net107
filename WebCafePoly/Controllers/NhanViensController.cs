@@ -64,17 +64,34 @@ public class NhanViensController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("MaNhanVien,HoTen,Email,MatKhau,VaiTro,TrangThai,PhieuBanHangs")] NhanVien nhanvien)
+    public async Task<IActionResult> Create([Bind("MaNhanVien,HoTen,Email,MatKhau,VaiTro,TrangThai")] NhanVien nhanvien)
     {
+        var nhanVienCuoi = await _context.NhanViens
+            .OrderByDescending(x => x.MaNhanVien)
+            .FirstOrDefaultAsync();
+
+        string maMoi = "NV001";
+
+        if (nhanVienCuoi != null)
+        {
+            int so = 0;
+            int.TryParse(nhanVienCuoi.MaNhanVien.Substring(2), out so);
+            maMoi = "NV" + (so + 1).ToString("D3");
+        }
+
+        nhanvien.MaNhanVien = maMoi;
+
+        ModelState.Remove("MaNhanVien");
+
         if (ModelState.IsValid)
         {
             _context.Add(nhanvien);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
         return View(nhanvien);
     }
-
     // GET: NHANVIENS/Edit/5
     public async Task<IActionResult> Edit(string? manhanvien)
     {
@@ -96,7 +113,7 @@ public class NhanViensController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(string? manhanvien, [Bind("MaNhanVien,HoTen,Email,MatKhau,VaiTro,TrangThai,PhieuBanHangs")] NhanVien nhanvien)
+    public async Task<IActionResult> Edit(string? manhanvien, [Bind("MaNhanVien,HoTen,Email,MatKhau,VaiTro,TrangThai")] NhanVien nhanvien)
     {
         if (manhanvien != nhanvien.MaNhanVien)
         {
