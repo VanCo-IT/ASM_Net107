@@ -18,7 +18,6 @@ public partial class PhieuBanHang
 
     [StringLength(50)]
     [Display(Name = "Mã khách hàng")]
-    [Required(ErrorMessage = "Không được để trống mã khách hàng")]
     public string? MaKhachHang { get; set; }
 
     [StringLength(6)]
