@@ -7,14 +7,16 @@
 }
 
 <section class="customer-menu">
-    <div class="container py-5">
-
-        <div class="menu-hero">
+    <div class="menu-hero">
+        <div class="container">
             <h1 class="menu-title">Thực đơn WebCafePoly</h1>
             <p class="menu-subtitle">Khám phá những món ngon tại quán</p>
         </div>
+    </div>
 
-        <form asp-controller="Guest" asp-action="Index" method="get" class="menu-filter mb-5">
+    <div class="container py-5">
+
+        <form asp-controller="Guest" asp-action="Index" method="get" class="menu-filter mb-5 form-vintage">
             <div class="row g-3">
 
                 <div class="col-md-3">
@@ -50,8 +52,8 @@
                 </div>
 
                 <div class="col-md-2">
-                    <button type="submit" class="btn btn-success w-100">
-                        <i class="bi bi-search"></i>
+                    <button type="submit" class="btn btn-vintage btn-vintage--primary w-100">
+                        <i class="bi bi-search" aria-hidden="true"></i>
                         Tìm kiếm
                     </button>
                 </div>
@@ -59,7 +61,7 @@
             </div>
         </form>
 
-        <div class="products-grid">
+        <div class="products-grid stagger-vintage">
             @foreach (var item in Model)
             {
                 <div class="col">
@@ -70,11 +72,11 @@
                             <div class="product-badge">
                                 @if (item.TrangThai)
                                 {
-                                    <span class="badge badge-success">Đang bán</span>
+                                    <span class="badge-vintage badge-vintage--success">Đang bán</span>
                                 }
                                 else
                                 {
-                                    <span class="badge badge-danger">Ngừng bán</span>
+                                    <span class="badge-vintage badge-vintage--danger">Ngừng bán</span>
                                 }
                             </div>
                         </div>
@@ -112,7 +114,7 @@
                                    asp-action="ThemVaoGio"
                                    asp-route-id="@item.MaSanPham"
                                    class="btn btn-order">
-                                    <i class="bi bi-cart-plus"></i>
+                                    <i class="bi bi-cart-plus" aria-hidden="true"></i>
                                     Đặt món
                                 </a>
                             </div>
@@ -125,11 +127,11 @@
         @if (!Model.Any())
         {
             <div class="empty-products">
-                <i class="bi bi-box"></i>
+                <i class="bi bi-cup-straw" aria-hidden="true"></i>
                 <h3>Chưa có món nào</h3>
                 <p>Hiện tại chưa có sản phẩm phù hợp với bộ lọc của bạn.</p>
-                <a asp-controller="Guest" asp-action="Index" class="btn btn-primary">
-                    <i class="bi bi-arrow-clockwise"></i>
+                <a asp-controller="Guest" asp-action="Index" class="btn btn-vintage btn-vintage--accent">
+                    <i class="bi bi-arrow-clockwise" aria-hidden="true"></i>
                     Xem tất cả
                 </a>
             </div>

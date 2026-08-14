@@ -16,13 +16,13 @@
         @if (!Model.Any())
         {
             <div class="cart-empty">
-                <i class="bi bi-cart-x"></i>
-                <h3>Gi�� hàng đang trống</h3>
+                <i class="bi bi-cart-x" aria-hidden="true"></i>
+                <h3>Giỏ hàng đang trống</h3>
                 <p>Hãy chọn món bạn muốn thưởng thức.</p>
                 <a asp-controller="Guest"
                    asp-action="Index"
-                   class="btn btn-success">
-                    <i class="bi bi-cup-hot"></i>
+                   class="btn btn-vintage btn-vintage--primary">
+                    <i class="bi bi-cup-hot" aria-hidden="true"></i>
                     Xem thực đơn
                 </a>
             </div>
@@ -49,7 +49,7 @@
                                             <div class="cart-product">
                                                 <img src="~/images/products/@item.HinhAnh"
                                                      alt="@item.TenSanPham"
-                                                     class="cart-product-image" />
+                                                     class="cart-product-image image-vintage" />
                                                 <div class="cart-product-info">
                                                     <h4>@item.TenSanPham</h4>
                                                 </div>
@@ -62,13 +62,15 @@
                                             <div class="quantity-control">
                                                 <a asp-action="GiamSoLuong"
                                                    asp-route-id="@item.MaSanPham"
-                                                   class="quantity-btn minus">
+                                                   class="quantity-btn minus"
+                                                   aria-label="Giảm số lượng">
                                                     <i class="bi bi-dash"></i>
                                                 </a>
                                                 <span class="quantity-value">@item.SoLuong</span>
                                                 <a asp-action="TangSoLuong"
                                                    asp-route-id="@item.MaSanPham"
-                                                   class="quantity-btn plus">
+                                                   class="quantity-btn plus"
+                                                   aria-label="Tăng số lượng">
                                                     <i class="bi bi-plus"></i>
                                                 </a>
                                             </div>
@@ -99,8 +101,8 @@
                         <span>Tổng cộng</span>
                         <span>@Model.Sum(x => x.ThanhTien).ToString("N0") VNĐ</span>
                     </div>
-                    <a asp-action="ThanhToan" class="btn btn-success checkout-btn">
-                        <i class="bi bi-credit-card"></i>
+                    <a asp-action="ThanhToan" class="btn btn-vintage btn-vintage--success checkout-btn">
+                        <i class="bi bi-credit-card" aria-hidden="true"></i>
                         Thanh toán
                     </a>
                 </div>

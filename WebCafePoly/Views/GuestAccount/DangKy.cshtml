@@ -18,12 +18,12 @@
 
             @if (ViewBag.Loi != null)
             {
-                <div class="alert alert-danger">
+                <div class="alert alert-vintage alert-vintage--danger">
                     @ViewBag.Loi
                 </div>
             }
 
-            <form asp-action="DangKy" method="post" class="auth-form">
+            <form asp-action="DangKy" method="post" class="auth-form form-vintage">
                 <div class="form-group">
                     <label asp-for="HoTen" class="form-label">Họ tên</label>
                     <input asp-for="HoTen" class="form-control" required />
@@ -53,8 +53,8 @@
                     <input asp-for="DiaChi" class="form-control" />
                 </div>
 
-                <button type="submit" class="btn btn-success">
-                    <i class="bi bi-person-plus"></i>
+                <button type="submit" class="btn btn-vintage btn-vintage--primary btn-vintage--lg">
+                    <i class="bi bi-person-plus" aria-hidden="true"></i>
                     Đăng ký
                 </button>
             </form>

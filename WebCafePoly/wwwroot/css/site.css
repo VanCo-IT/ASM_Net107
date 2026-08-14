@@ -1,6 +1,8 @@
 @import url("variables.css");
 @import url("reset.css");
 @import url("components.css");
+@import url("vintage-components.css");
+@import url("vintage-effects.css");
 @import url("layout-admin.css");
 @import url("layout-customer.css");
 @import url("pages-admin.css");

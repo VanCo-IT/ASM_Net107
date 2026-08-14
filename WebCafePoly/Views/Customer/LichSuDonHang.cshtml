@@ -16,13 +16,13 @@
         @if (!Model.Any())
         {
             <div class="cart-empty">
-                <i class="bi bi-receipt"></i>
+                <i class="bi bi-receipt" aria-hidden="true"></i>
                 <h3>Chưa có đơn hàng</h3>
                 <p>Bạn chưa thực hiện đơn hàng nào.</p>
                 <a asp-controller="Guest"
                    asp-action="Index"
-                   class="btn btn-success">
-                    <i class="bi bi-cup-hot"></i>
+                   class="btn btn-vintage btn-vintage--primary">
+                    <i class="bi bi-cup-hot" aria-hidden="true"></i>
                     Xem thực đơn
                 </a>
             </div>
@@ -70,8 +70,8 @@
                                         <a asp-controller="Customer"
                                            asp-action="ChiTietHoaDon"
                                            asp-route-id="@item.MaPhieu"
-                                           class="btn btn-detail">
-                                            <i class="bi bi-eye"></i>
+                                           class="btn btn-vintage btn-vintage--outline btn-vintage--sm">
+                                            <i class="bi bi-eye" aria-hidden="true"></i>
                                             Chi tiết
                                         </a>
                                     </td>

@@ -15,7 +15,7 @@
 
         @if (ViewBag.ThongBao != null)
         {
-            <div class="alert alert-success">
+            <div class="alert alert-vintage alert-vintage--success">
                 @ViewBag.ThongBao
             </div>
         }
@@ -25,7 +25,7 @@
                 <i class="bi bi-person-circle"></i>
             </div>
 
-            <form asp-action="HoSoKhachHang" method="post" class="profile-form">
+            <form asp-action="HoSoKhachHang" method="post" class="profile-form form-vintage">
                 <input asp-for="MaKhachHang" type="hidden" />
                 <input asp-for="TrangThai" type="hidden" />
 
@@ -82,8 +82,8 @@
                     </label>
                 </div>
 
-                <button type="submit" class="btn btn-success profile-submit">
-                    <i class="bi bi-check-circle"></i>
+                <button type="submit" class="btn btn-vintage btn-vintage--primary profile-submit">
+                    <i class="bi bi-check-circle" aria-hidden="true"></i>
                     Cập nhật thông tin
                 </button>
             </form>

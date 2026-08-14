@@ -11,10 +11,12 @@
         <div class="row g-5">
             <div class="col-lg-6">
                 <div class="detail-gallery">
-                    <img src="~/images/products/@Model.HinhAnh"
-                         alt="@Model.TenSanPham"
-                         class="detail-main-image"
-                         id="mainImage" />
+                    <div class="frame-vintage frame-vintage--photo">
+                        <img src="~/images/products/@Model.HinhAnh"
+                             alt="@Model.TenSanPham"
+                             class="detail-main-image image-vintage"
+                             id="mainImage" />
+                    </div>
                     <div class="detail-thumbs">
                         <div class="detail-thumb active">
                             <img src="~/images/products/@Model.HinhAnh" alt="@Model.TenSanPham" />
@@ -24,32 +26,32 @@
             </div>
 
             <div class="col-lg-6">
-                <div class="detail-header">
+                <div class="detail-header vintage-card vintage-card--paper p-4">
                     <span class="product-category">@Model.MaLoaiNavigation.TenLoai</span>
                     <h1>@Model.TenSanPham</h1>
                     <div class="detail-meta">
                         <span class="detail-price">@String.Format("{0:N0} VNĐ", Model.DonGia)</span>
                         @if (Model.TrangThai)
                         {
-                            <span class="detail-status status-selling">Đang bán</span>
+                            <span class="badge-vintage badge-vintage--success">Đang bán</span>
                         }
                         else
                         {
-                            <span class="detail-status status-stop">Ngừng bán</span>
+                            <span class="badge-vintage badge-vintage--danger">Ngừng bán</span>
                         }
                     </div>
                 </div>
 
-                <div class="detail-actions">
+                <div class="detail-actions mt-4">
                     <a asp-controller="Customer"
                        asp-action="ThemVaoGio"
                        asp-route-id="@Model.MaSanPham"
-                       class="btn btn-success">
-                        <i class="bi bi-cart-plus"></i>
+                       class="btn btn-vintage btn-vintage--success">
+                        <i class="bi bi-cart-plus" aria-hidden="true"></i>
                         Đặt món
                     </a>
-                    <a asp-controller="Guest" asp-action="Index" class="btn btn-outline">
-                        <i class="bi bi-arrow-left"></i>
+                    <a asp-controller="Guest" asp-action="Index" class="btn btn-vintage btn-vintage--outline">
+                        <i class="bi bi-arrow-left" aria-hidden="true"></i>
                         Quay lại thực đơn
                     </a>
                 </div>
