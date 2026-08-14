@@ -1,40 +1,60 @@
 ﻿@model WebCafePoly.Models.SanPham
 
 @{
+    Layout = "_CustomerLayout";
     ViewData["Title"] = "Chi tiết món ăn";
 }
 
-<h2>Chi tiết món ăn</h2>
+<section class="product-detail">
+    <div class="container">
 
-<div class="card p-3" style="max-width:700px;">
-    <div class="row">
-        <div class="col-md-4">
-            <img src="~/images/products/@Model.HinhAnh"
-                 class="img-fluid rounded"
-                 alt="@Model.TenSanPham" />
+        <div class="row g-5">
+            <div class="col-lg-6">
+                <div class="detail-gallery">
+                    <img src="~/images/products/@Model.HinhAnh"
+                         alt="@Model.TenSanPham"
+                         class="detail-main-image"
+                         id="mainImage" />
+                    <div class="detail-thumbs">
+                        <div class="detail-thumb active">
+                            <img src="~/images/products/@Model.HinhAnh" alt="@Model.TenSanPham" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="detail-header">
+                    <span class="product-category">@Model.MaLoaiNavigation.TenLoai</span>
+                    <h1>@Model.TenSanPham</h1>
+                    <div class="detail-meta">
+                        <span class="detail-price">@String.Format("{0:N0} VNĐ", Model.DonGia)</span>
+                        @if (Model.TrangThai)
+                        {
+                            <span class="detail-status status-selling">Đang bán</span>
+                        }
+                        else
+                        {
+                            <span class="detail-status status-stop">Ngừng bán</span>
+                        }
+                    </div>
+                </div>
+
+                <div class="detail-actions">
+                    <a asp-controller="Customer"
+                       asp-action="ThemVaoGio"
+                       asp-route-id="@Model.MaSanPham"
+                       class="btn btn-success">
+                        <i class="bi bi-cart-plus"></i>
+                        Đặt món
+                    </a>
+                    <a asp-controller="Guest" asp-action="Index" class="btn btn-outline">
+                        <i class="bi bi-arrow-left"></i>
+                        Quay lại thực đơn
+                    </a>
+                </div>
+            </div>
         </div>
 
-        <div class="col-md-8">
-            <h3>@Model.TenSanPham</h3>
-
-            <p>
-                <strong>Loại:</strong>
-                @Model.MaLoaiNavigation.TenLoai
-            </p>
-
-            <p>
-                <strong>Đơn giá:</strong>
-                @String.Format("{0:N0} VNĐ", Model.DonGia)
-            </p>
-
-            <p>
-                <strong>Trạng thái:</strong>
-                @(Model.TrangThai ? "Đang bán" : "Ngừng bán")
-            </p>
-
-            <a asp-action="Index" class="btn btn-secondary">
-                Quay lại
-            </a>
-        </div>
     </div>
-</div>
+</section>

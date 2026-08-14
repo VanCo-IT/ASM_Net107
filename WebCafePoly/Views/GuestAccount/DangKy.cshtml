@@ -1,47 +1,75 @@
 ﻿@model WebCafePoly.Models.KhachHang
 
 @{
+    Layout = "_CustomerLayout";
     ViewData["Title"] = "Đăng ký";
 }
-<h2>Đăng ký tài khoản</h2>
 
-<form asp-action="DangKy" method="post">
+<section class="auth-page">
+    <div class="container py-5">
 
-    <div class="mb-3">
-        <label asp-for="HoTen"></label>
-        <input asp-for="HoTen" class="form-control" />
-        <span asp-validation-for="HoTen" class="text-danger"></span>
+        <div class="auth-card">
+            <div class="auth-icon">
+                <i class="bi bi-person-plus-fill"></i>
+            </div>
+
+            <h1>Đăng ký</h1>
+            <p>Tạo tài khoản để đặt món và quản lý đơn hàng</p>
+
+            @if (ViewBag.Loi != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.Loi
+                </div>
+            }
+
+            <form asp-action="DangKy" method="post" class="auth-form">
+                <div class="form-group">
+                    <label asp-for="HoTen" class="form-label">Họ tên</label>
+                    <input asp-for="HoTen" class="form-control" required />
+                    <span asp-validation-for="HoTen" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Email" class="form-label">Email</label>
+                    <input asp-for="Email" type="email" class="form-control" required />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SoDienThoai" class="form-label">Số điện thoại</label>
+                    <input asp-for="SoDienThoai" class="form-control" required />
+                    <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="MatKhau" class="form-label">Mật khẩu</label>
+                    <input asp-for="MatKhau" type="password" class="form-control" required />
+                    <span asp-validation-for="MatKhau" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="DiaChi" class="form-label">Địa chỉ</label>
+                    <input asp-for="DiaChi" class="form-control" />
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-person-plus"></i>
+                    Đăng ký
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                Đã có tài khoản?
+                <a asp-controller="GuestAccount"
+                   asp-action="DangNhap">
+                    Đăng nhập ngay
+                </a>
+            </div>
+        </div>
+
     </div>
-
-    <div class="mb-3">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="SoDienThoai"></label>
-        <input asp-for="SoDienThoai" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="MatKhau"></label>
-        <input asp-for="MatKhau"
-               type="password"
-               class="form-control" />
-        <span asp-validation-for="MatKhau" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="DiaChi"></label>
-        <input asp-for="DiaChi" class="form-control" />
-    </div>
-
-    <button class="btn btn-success">
-        Đăng ký
-    </button>
-
-</form>
+</section>
 
 @section Scripts {
     @{

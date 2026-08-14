@@ -2,108 +2,109 @@
 
 @{
     Layout = "_CustomerLayout";
-    ViewData["Title"] = "Giỏ hàng";
+    ViewData["Title"] = "Gi�� hàng";
 }
 
 <section class="cart-page">
     <div class="container py-5">
 
-        <div class="text-center mb-5">
-            <h1 class="menu-title">Giỏ hàng</h1>
-            <p class="menu-subtitle">Kiểm tra món trước khi thanh toán</p>
+        <div class="cart-header">
+            <h1>Gi�� hàng</h1>
+            <p>Kiểm tra món trước khi thanh toán</p>
         </div>
 
         @if (!Model.Any())
         {
-            <div class="empty-cart">
+            <div class="cart-empty">
                 <i class="bi bi-cart-x"></i>
-                <h3>Giỏ hàng đang trống</h3>
+                <h3>Gi�� hàng đang trống</h3>
                 <p>Hãy chọn món bạn muốn thưởng thức.</p>
-
                 <a asp-controller="Guest"
                    asp-action="Index"
-                   class="btn btn-order">
+                   class="btn btn-success">
+                    <i class="bi bi-cup-hot"></i>
                     Xem thực đơn
                 </a>
             </div>
         }
         else
         {
-            <div class="cart-box">
-
-                <div class="table-responsive">
-                    <table class="table cart-table align-middle">
-                        <thead>
-                            <tr>
-                                <th>Tên món</th>
-                                <th>Đơn giá</th>
-                                <th>Số lượng</th>
-                                <th>Thành tiền</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
+            <div class="cart-content">
+                <div class="cart-items">
+                    <div class="table-responsive">
+                        <table class="table cart-table align-middle">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        <strong>@item.TenSanPham</strong>
-                                    </td>
-
-                                    <td>
-                                        @item.DonGia.ToString("N0") VNĐ
-                                    </td>
-
-                                    <td>
-                                        <div class="quantity-control">
-
-                                            <a asp-action="GiamSoLuong"
-                                               asp-route-id="@item.MaSanPham"
-                                               class="quantity-btn minus">
-                                                -
-                                            </a>
-
-                                            <span>@item.SoLuong</span>
-
-                                            <a asp-action="TangSoLuong"
-                                               asp-route-id="@item.MaSanPham"
-                                               class="quantity-btn plus">
-                                                +
-                                            </a>
-
-                                        </div>
-                                    </td>
-
-                                    <td>
-                                        <strong class="cart-price">
-                                            @item.ThanhTien.ToString("N0") VNĐ
-                                        </strong>
-                                    </td>
+                                    <th>Tên món</th>
+                                    <th>Đơn giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Thành tiền</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="cart-product">
+                                                <img src="~/images/products/@item.HinhAnh"
+                                                     alt="@item.TenSanPham"
+                                                     class="cart-product-image" />
+                                                <div class="cart-product-info">
+                                                    <h4>@item.TenSanPham</h4>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="cart-price">@item.DonGia.ToString("N0") VNĐ</span>
+                                        </td>
+                                        <td>
+                                            <div class="quantity-control">
+                                                <a asp-action="GiamSoLuong"
+                                                   asp-route-id="@item.MaSanPham"
+                                                   class="quantity-btn minus">
+                                                    <i class="bi bi-dash"></i>
+                                                </a>
+                                                <span class="quantity-value">@item.SoLuong</span>
+                                                <a asp-action="TangSoLuong"
+                                                   asp-route-id="@item.MaSanPham"
+                                                   class="quantity-btn plus">
+                                                    <i class="bi bi-plus"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <strong class="cart-subtotal">
+                                                @item.ThanhTien.ToString("N0") VNĐ
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
-                <div class="cart-footer">
-
-                    <div>
-                        <span>Tổng tiền</span>
-                        <strong>
-                            @Model.Sum(x => x.ThanhTien).ToString("N0") VNĐ
-                        </strong>
+                <div class="cart-summary">
+                    <h3>Tóm tắt đơn hàng</h3>
+                    <div class="summary-row">
+                        <span class="label">Tạm tính</span>
+                        <span class="value">@Model.Sum(x => x.ThanhTien).ToString("N0") VNĐ</span>
                     </div>
-
-                    <a asp-action="ThanhToan"
-                       class="btn btn-order checkout-btn">
+                    <div class="summary-row">
+                        <span class="label">Phí vận chuyển</span>
+                        <span class="value">Miễn phí</span>
+                    </div>
+                    <div class="summary-total">
+                        <span>Tổng cộng</span>
+                        <span>@Model.Sum(x => x.ThanhTien).ToString("N0") VNĐ</span>
+                    </div>
+                    <a asp-action="ThanhToan" class="btn btn-success checkout-btn">
                         <i class="bi bi-credit-card"></i>
                         Thanh toán
                     </a>
-
                 </div>
-
             </div>
         }
-
     </div>
 </section>

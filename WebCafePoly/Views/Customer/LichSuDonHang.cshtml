@@ -8,21 +8,21 @@
 <section class="history-page">
     <div class="container py-5">
 
-        <div class="text-center mb-5">
-            <h1 class="menu-title">Lịch sử đơn hàng</h1>
-            <p class="menu-subtitle">Theo dõi những đơn hàng bạn đã đặt</p>
+        <div class="history-header">
+            <h1>Lịch sử đơn hàng</h1>
+            <p>Theo dõi những đơn hàng bạn đã đặt</p>
         </div>
 
         @if (!Model.Any())
         {
-            <div class="empty-cart">
+            <div class="cart-empty">
                 <i class="bi bi-receipt"></i>
                 <h3>Chưa có đơn hàng</h3>
                 <p>Bạn chưa thực hiện đơn hàng nào.</p>
-
                 <a asp-controller="Guest"
                    asp-action="Index"
-                   class="btn btn-order">
+                   class="btn btn-success">
+                    <i class="bi bi-cup-hot"></i>
                     Xem thực đơn
                 </a>
             </div>
@@ -30,10 +30,8 @@
         else
         {
             <div class="history-card">
-
                 <div class="table-responsive">
                     <table class="table history-table align-middle">
-
                         <thead>
                             <tr>
                                 <th>Mã phiếu</th>
@@ -42,19 +40,16 @@
                                 <th>Chi tiết</th>
                             </tr>
                         </thead>
-
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr>
                                     <td>
-                                        <strong>@item.MaPhieu</strong>
+                                        <strong class="order-code">@item.MaPhieu</strong>
                                     </td>
-
                                     <td>
-                                        @item.NgayTao
+                                        <span class="order-date">@item.NgayTao.ToString("dd/MM/yyyy HH:mm")</span>
                                     </td>
-
                                     <td>
                                         @if (item.TrangThai)
                                         {
@@ -71,7 +66,6 @@
                                             </span>
                                         }
                                     </td>
-
                                     <td>
                                         <a asp-controller="Customer"
                                            asp-action="ChiTietHoaDon"
@@ -84,12 +78,9 @@
                                 </tr>
                             }
                         </tbody>
-
                     </table>
                 </div>
-
             </div>
         }
-
     </div>
 </section>

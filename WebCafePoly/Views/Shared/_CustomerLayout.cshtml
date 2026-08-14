@@ -1,4 +1,3 @@
-```cshtml
 @using Microsoft.AspNetCore.Http
 
 <!DOCTYPE html>
@@ -15,12 +14,14 @@
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
 
-    <link rel="stylesheet" href="~/css/customer.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
     @RenderSection("Styles", required: false)
 </head>
 
-<body>
+<body class="customer-layout">
+
+    <a href="#main-content" class="skip-link">Chuyển đến nội dung chính</a>
 
     <header class="customer-header">
         <nav class="navbar navbar-expand-lg">
@@ -36,14 +37,16 @@
                 <button class="navbar-toggler"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target="#customerNavbar">
+                        data-bs-target="#customerNavbar"
+                        aria-controls="customerNavbar"
+                        aria-expanded="false"
+                        aria-label="Mở menu">
                     <i class="bi bi-list"></i>
                 </button>
 
-                <div class="collapse navbar-collapse" id="customerNavbar">
+                <div class="collapse navbar-collapse customer-nav" id="customerNavbar">
 
                     <ul class="navbar-nav mx-auto">
-
                         <li class="nav-item">
                             <a class="nav-link"
                                asp-controller="Guest"
@@ -65,7 +68,6 @@
                                 Về chúng tôi
                             </a>
                         </li>
-
                     </ul>
 
                     <div class="customer-account">
@@ -82,13 +84,13 @@
                             <div class="dropdown">
                                 <button class="customer-user dropdown-toggle"
                                         type="button"
-                                        data-bs-toggle="dropdown">
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false">
                                     <i class="bi bi-person-circle"></i>
                                     @(Context.Session.GetString("HoTenKhachHang") ?? "Tài khoản")
                                 </button>
 
-                                <ul class="dropdown-menu dropdown-menu-end">
-
+                                <ul class="dropdown-menu dropdown-menu-end show">
                                     <li>
                                         <a class="dropdown-item"
                                            asp-controller="Customer"
@@ -119,7 +121,6 @@
                                             Đăng xuất
                                         </a>
                                     </li>
-
                                 </ul>
                             </div>
                         }
@@ -145,30 +146,57 @@
         </nav>
     </header>
 
-    <main>
+    <main id="main-content" class="customer-main" role="main">
         @RenderBody()
     </main>
 
     <footer class="customer-footer" id="about">
         <div class="container">
-            <div class="row">
-
-                <div class="col-md-6">
+            <div class="footer-grid">
+                <div class="footer-brand">
                     <h4>
                         <i class="bi bi-cup-hot-fill"></i>
                         WebCafePoly
                     </h4>
-
-                    <p>
-                        Không gian cà phê dành cho những phút giây thư giãn.
-                    </p>
+                    <p>Không gian cà phê dành cho những phút giây thư giãn.</p>
                 </div>
 
-                <div class="col-md-6 text-md-end">
-                    <p class="mb-1">Cà phê • Trà • Nước ép • Bánh</p>
-                    <p class="mb-0">© @DateTime.Now.Year WebCafePoly</p>
+                <div class="footer-section">
+                    <h5>Thực đơn</h5>
+                    <ul>
+                        <li><a asp-controller="Guest" asp-action="Index">Cà phê</a></li>
+                        <li><a asp-controller="Guest" asp-action="Index">Trà</a></li>
+                        <li><a asp-controller="Guest" asp-action="Index">Nước ép</a></li>
+                        <li><a asp-controller="Guest" asp-action="Index">Bánh ngọt</a></li>
+                    </ul>
                 </div>
 
+                <div class="footer-section">
+                    <h5>Hỗ trợ</h5>
+                    <ul>
+                        <li><a href="#">Giao hàng</a></li>
+                        <li><a href="#">Thanh toán</a></li>
+                        <li><a href="#">Đổi trả</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section footer-contact">
+                    <h5>Liên hệ</h5>
+                    <p><i class="bi bi-geo-alt-fill"></i> 123 Đường Cà Phê, Quận 1, TP.HCM</p>
+                    <p><i class="bi bi-telephone-fill"></i> 090 123 4567</p>
+                    <p><i class="bi bi-envelope-fill"></i> info@webcafepoly.vn</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="mb-0">© @DateTime.Now.Year WebCafePoly. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                    <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                </div>
             </div>
         </div>
     </footer>
@@ -179,4 +207,3 @@
 
 </body>
 </html>
-```

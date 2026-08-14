@@ -3,7 +3,7 @@ using WebCafePoly.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<PolyCafeContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("PolyCafe")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

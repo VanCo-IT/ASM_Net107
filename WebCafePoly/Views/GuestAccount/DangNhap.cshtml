@@ -7,7 +7,6 @@
     <div class="container py-5">
 
         <div class="auth-card">
-
             <div class="auth-icon">
                 <i class="bi bi-person-circle"></i>
             </div>
@@ -22,42 +21,41 @@
                 </div>
             }
 
-            <form asp-action="DangNhap" method="post">
-
-                <div class="mb-3 text-start">
+            <form asp-action="DangNhap" method="post" class="auth-form">
+                <div class="form-group">
                     <label class="form-label">Email</label>
                     <input type="email"
                            name="email"
                            class="form-control"
                            value="@ViewBag.Email"
-                           required />
+                           required
+                           autocomplete="email" />
                 </div>
 
-                <div class="mb-3 text-start">
+                <div class="form-group">
                     <label class="form-label">Mật khẩu</label>
                     <input type="password"
                            name="matKhau"
                            class="form-control"
-                           required />
+                           required
+                           autocomplete="current-password" />
                 </div>
 
-                <div class="form-check text-start mb-4">
+                <div class="form-check">
                     <input class="form-check-input"
                            type="checkbox"
                            id="remember"
                            name="remember"
                            value="true" />
-
                     <label class="form-check-label" for="remember">
                         Ghi nhớ Email
                     </label>
                 </div>
 
-                <button type="submit" class="btn btn-order w-100">
+                <button type="submit" class="btn btn-success">
                     <i class="bi bi-box-arrow-in-right"></i>
                     Đăng nhập
                 </button>
-
             </form>
 
             <div class="auth-footer">
@@ -67,7 +65,6 @@
                     Đăng ký ngay
                 </a>
             </div>
-
         </div>
 
     </div>

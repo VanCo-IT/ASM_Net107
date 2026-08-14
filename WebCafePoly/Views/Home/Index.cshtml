@@ -1,194 +1,158 @@
 ﻿@{
-ViewData["Title"] = "Trang quản trị";
+    ViewData["Title"] = "Trang quản trị";
 }
 
 <div class="admin-dashboard">
 
-```
-<!-- HEADER -->
-<div class="dashboard-header">
-    <div>
-        <h1>Trang quản trị</h1>
-        <p>Quản lý và theo dõi hoạt động của WebCafePoly</p>
-    </div>
+    <!-- HEADER -->
+    <div class="dashboard-header">
+        <div>
+            <h1>Trang quản trị</h1>
+            <p>Quản lý và theo dõi hoạt động của WebCafePoly</p>
+        </div>
 
-    <div class="dashboard-date">
-        <span>☕</span>
-        WebCafePoly
-    </div>
-</div>
-
-
-<!-- STATISTICS -->
-<div class="row g-4 mb-4">
-
-    <!-- SẢN PHẨM -->
-    <div class="col-12 col-sm-6 col-xl-3">
-        <div class="dashboard-card">
-            <div class="dashboard-card-icon product-icon">
-                ☕
-            </div>
-
-            <div class="dashboard-card-content">
-                <span>Sản phẩm</span>
-                <strong>@ViewBag.SoSanPham</strong>
-            </div>
-
-            <a asp-controller="SanPhams"
-               asp-action="Index"
-               class="dashboard-card-link">
-                Quản lý →
-            </a>
+        <div class="dashboard-date">
+            <i class="bi bi-cup-hot-fill"></i>
+            WebCafePoly
         </div>
     </div>
 
 
-    <!-- KHÁCH HÀNG -->
-    <div class="col-12 col-sm-6 col-xl-3">
-        <div class="dashboard-card">
-            <div class="dashboard-card-icon customer-icon">
-                ♙
-            </div>
+    <!-- STATISTICS -->
+    <div class="stats-grid">
 
-            <div class="dashboard-card-content">
-                <span>Khách hàng</span>
-                <strong>@ViewBag.SoKhachHang</strong>
+        <!-- SẢN PHẨM -->
+        <div class="stat-card">
+            <div class="stat-icon primary">
+                <i class="bi bi-cup-hot-fill"></i>
             </div>
+            <div class="stat-content">
+                <span class="stat-label">Sản phẩm</span>
+                <strong class="stat-value">@ViewBag.SoSanPham</strong>
+            </div>
+            <a asp-controller="SanPhams"
+               asp-action="Index"
+               class="stat-link">
+                Quản lý <i class="bi bi-arrow-right"></i>
+            </a>
+        </div>
 
+
+        <!-- KHÁCH HÀNG -->
+        <div class="stat-card">
+            <div class="stat-icon success">
+                <i class="bi bi-people-fill"></i>
+            </div>
+            <div class="stat-content">
+                <span class="stat-label">Khách hàng</span>
+                <strong class="stat-value">@ViewBag.SoKhachHang</strong>
+            </div>
             <a asp-controller="KhachHangs"
                asp-action="Index"
-               class="dashboard-card-link">
-                Quản lý →
+               class="stat-link">
+                Quản lý <i class="bi bi-arrow-right"></i>
             </a>
         </div>
-    </div>
 
 
-    <!-- NHÂN VIÊN -->
-    <div class="col-12 col-sm-6 col-xl-3">
-        <div class="dashboard-card">
-            <div class="dashboard-card-icon employee-icon">
-                ♟
+        <!-- NHÂN VIÊN -->
+        <div class="stat-card">
+            <div class="stat-icon warning">
+                <i class="bi bi-person-badge-fill"></i>
             </div>
-
-            <div class="dashboard-card-content">
-                <span>Nhân viên</span>
-                <strong>@ViewBag.SoNhanVien</strong>
+            <div class="stat-content">
+                <span class="stat-label">Nhân viên</span>
+                <strong class="stat-value">@ViewBag.SoNhanVien</strong>
             </div>
-
             <a asp-controller="NhanViens"
                asp-action="Index"
-               class="dashboard-card-link">
-                Quản lý →
+               class="stat-link">
+                Quản lý <i class="bi bi-arrow-right"></i>
             </a>
         </div>
-    </div>
 
 
-    <!-- PHIẾU BÁN -->
-    <div class="col-12 col-sm-6 col-xl-3">
-        <div class="dashboard-card">
-            <div class="dashboard-card-icon invoice-icon">
-                ▤
+        <!-- PHIẾU BÁN -->
+        <div class="stat-card">
+            <div class="stat-icon info">
+                <i class="bi bi-receipt-fill"></i>
             </div>
-
-            <div class="dashboard-card-content">
-                <span>Phiếu bán</span>
-                <strong>@ViewBag.SoPhieuBan</strong>
+            <div class="stat-content">
+                <span class="stat-label">Phiếu bán</span>
+                <strong class="stat-value">@ViewBag.SoPhieuBan</strong>
             </div>
-
             <a asp-controller="PhieuBanHangs"
                asp-action="Index"
-               class="dashboard-card-link">
-                Quản lý →
+               class="stat-link">
+                Quản lý <i class="bi bi-arrow-right"></i>
             </a>
         </div>
+
     </div>
 
-</div>
 
-
-<!-- QUICK ACTIONS -->
-<div class="dashboard-section">
-
-    <div class="section-heading">
-        <div>
-            <h3>Thao tác nhanh</h3>
-            <p>Truy cập nhanh các chức năng quản trị</p>
+    <!-- QUICK ACTIONS -->
+    <div class="quick-actions">
+        <div class="section-header">
+            <div>
+                <h3>Thao tác nhanh</h3>
+                <p>Truy cập nhanh các chức năng quản trị</p>
+            </div>
         </div>
-    </div>
 
-    <div class="row g-3">
-
-        <div class="col-12 col-md-6 col-xl-3">
+        <div class="actions-grid">
             <a asp-controller="SanPhams"
                asp-action="Create"
-               class="quick-action">
-                <span class="quick-action-icon">＋</span>
-                <span>
+               class="action-card">
+                <span class="action-icon"><i class="bi bi-plus-lg"></i></span>
+                <span class="action-text">
                     <strong>Thêm sản phẩm</strong>
                     <small>Tạo sản phẩm mới</small>
                 </span>
             </a>
-        </div>
 
-        <div class="col-12 col-md-6 col-xl-3">
             <a asp-controller="LoaiSanPhams"
                asp-action="Create"
-               class="quick-action">
-                <span class="quick-action-icon">＋</span>
-                <span>
+               class="action-card">
+                <span class="action-icon"><i class="bi bi-plus-lg"></i></span>
+                <span class="action-text">
                     <strong>Thêm loại sản phẩm</strong>
                     <small>Tạo loại mới</small>
                 </span>
             </a>
-        </div>
 
-        <div class="col-12 col-md-6 col-xl-3">
             <a asp-controller="KhachHangs"
                asp-action="Create"
-               class="quick-action">
-                <span class="quick-action-icon">＋</span>
-                <span>
+               class="action-card">
+                <span class="action-icon"><i class="bi bi-plus-lg"></i></span>
+                <span class="action-text">
                     <strong>Thêm khách hàng</strong>
                     <small>Tạo khách hàng mới</small>
                 </span>
             </a>
-        </div>
 
-        <div class="col-12 col-md-6 col-xl-3">
             <a asp-controller="NhanViens"
                asp-action="Create"
-               class="quick-action">
-                <span class="quick-action-icon">＋</span>
-                <span>
+               class="action-card">
+                <span class="action-icon"><i class="bi bi-plus-lg"></i></span>
+                <span class="action-text">
                     <strong>Thêm nhân viên</strong>
                     <small>Tạo nhân viên mới</small>
                 </span>
             </a>
         </div>
-
     </div>
 
-</div>
 
-
-<!-- INFORMATION -->
-<div class="dashboard-info">
-
-    <div class="dashboard-info-icon">
-        ☕
+    <!-- INFORMATION -->
+    <div class="info-card">
+        <div class="info-icon">
+            <i class="bi bi-cup-hot-fill"></i>
+        </div>
+        <div class="info-content">
+            <h4>WebCafePoly Admin</h4>
+            <p>Hệ thống quản lý quán cafe — quản lý sản phẩm, khách hàng, nhân viên và phiếu bán hàng.</p>
+        </div>
     </div>
-
-    <div>
-        <h4>WebCafePoly Admin</h4>
-        <p>
-            Hệ thống quản lý quán cafe — quản lý sản phẩm,
-            khách hàng, nhân viên và phiếu bán hàng.
-        </p>
-    </div>
-
-</div>
-```
 
 </div>

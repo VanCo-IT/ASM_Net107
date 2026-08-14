@@ -1,230 +1,173 @@
-```cshtml
 @model IEnumerable<WebCafePoly.Models.PhieuBanHang>
 
 @{
-    ViewData["Title"] = "Quản lý phiếu bán hàng";
+    ViewData["Title"] = "Quản lý phiếu bán";
 }
 
-<div class="invoice-admin-page">
+<div class="product-admin-page">
 
     <!-- HEADER -->
-    <div class="invoice-page-header">
+    <div class="page-header">
+        <div class="page-header-content">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a asp-controller="Home" asp-action="Index">Quản trị</a>
+                <span class="separator"><i class="bi bi-chevron-right"></i></span>
+                <span class="current">Phiếu bán</span>
+            </nav>
+            <h1>Quản lý phiếu bán</h1>
+            <p>Quản lý danh sách phiếu bán hàng.</p>
+        </div>
+        <div class="page-actions">
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i>
+                Tạo phiếu
+            </a>
+        </div>
+    </div>
 
-        <div>
-            <div class="page-breadcrumb">
-                <span>Quản trị</span>
-                <span>/</span>
-                <strong>Phiếu bán hàng</strong>
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+        <div class="toolbar-left">
+            <div class="search-box">
+                <i class="bi bi-search search-icon"></i>
+                <input type="text"
+                       id="txtTimKiem"
+                       class="form-control"
+                       placeholder="Tìm kiếm theo mã phiếu..." />
             </div>
-
-            <h1>Quản lý phiếu bán hàng</h1>
-
-            <p>
-                Theo dõi các phiếu bán hàng được tạo trong hệ thống.
-            </p>
         </div>
-
-        <a asp-action="Create" class="btn btn-add-invoice">
-            <span>＋</span>
-            Tạo phiếu bán
-        </a>
-
+        <div class="toolbar-right">
+            <div class="toolbar-count">
+                <span>Danh sách phiếu bán</span>
+            </div>
+        </div>
     </div>
-
-
-    <!-- SUMMARY -->
-    <div class="invoice-summary">
-
-        <div class="invoice-summary-icon">
-            🧾
-        </div>
-
-        <div>
-            <span>Tổng số phiếu</span>
-            <strong>@Model.Count()</strong>
-        </div>
-
-    </div>
-
 
     <!-- TABLE -->
-    <div class="invoice-table-card">
-
-        <div class="invoice-table-header">
-
-            <div>
-                <h3>Danh sách phiếu bán hàng</h3>
-                <p>Thông tin các giao dịch bán hàng trong hệ thống</p>
+    <div id="ketQuaTimKiem">
+        @if (Model.Any())
+        {
+            <div class="table-card">
+                <div class="table-responsive">
+                    <table class="table data-table">
+                        <thead>
+                            <tr>
+                                <th>Mã phiếu</th>
+                                <th>Nhân viên</th>
+                                <th>Khách hàng</th>
+                                <th>Ngày tạo</th>
+                                <th>Trạng thái</th>
+                                <th class="text-end">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <strong class="text-primary">@item.MaPhieu</strong>
+                                    </td>
+                                    <td>
+                                        <div class="name-cell" style="min-width: auto;">
+                                            <div class="avatar">
+                                                <i class="bi bi-person-badge-fill"></i>
+                                            </div>
+                                            <div class="name-info">
+                                                <strong>@item.MaNhanVienNavigation?.HoTen</strong>
+                                                <small>@item.MaNhanVien</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @if (item.MaKhachHang != null)
+                                        {
+                                            <div class="name-cell" style="min-width: auto;">
+                                                <div class="avatar">
+                                                    <i class="bi bi-person-fill"></i>
+                                                </div>
+                                                <div class="name-info">
+                                                    <strong>@item.MaKhachHangNavigation?.HoTen</strong>
+                                                    <small>@item.MaKhachHang</small>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">Khách vãng lai</span>
+                                        }
+                                    </td>
+                                    <td>@item.NgayTao.ToString("dd/MM/yyyy HH:mm")</td>
+                                    <td>
+                                        @if (item.TrangThai)
+                                        {
+                                            <span class="status-badge status-active">
+                                                <span class="dot"></span>
+                                                Đã thanh toán
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="status-badge status-pending">
+                                                <span class="dot"></span>
+                                                Chưa thanh toán
+                                            </span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="actions-cell">
+                                            <a asp-action="Details"
+                                               asp-route-maphiban="@item.MaPhieu"
+                                               class="action-btn action-view"
+                                               title="Xem chi tiết">
+                                                <i class="bi bi-eye-fill"></i>
+                                            </a>
+                                            <a asp-action="Edit"
+                                               asp-route-maphiban="@item.MaPhieu"
+                                               class="action-btn action-edit"
+                                               title="Chỉnh sửa">
+                                                <i class="bi bi-pencil-fill"></i>
+                                            </a>
+                                            <a asp-action="Delete"
+                                               asp-route-maphiban="@item.MaPhieu"
+                                               class="action-btn action-delete"
+                                               title="Xóa phiếu">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
-
-        </div>
-
-
-        <div class="table-responsive">
-
-            <table class="table invoice-table">
-
-                <thead>
-                    <tr>
-                        <th>Phiếu bán</th>
-                        <th>Khách hàng</th>
-                        <th>Thẻ</th>
-                        <th>Nhân viên</th>
-                        <th>Ngày tạo</th>
-                        <th>Trạng thái</th>
-                        <th class="text-end">Thao tác</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-
-                            <!-- INVOICE -->
-                            <td>
-                                <div class="invoice-code-cell">
-
-                                    <div class="invoice-icon">
-                                        🧾
-                                    </div>
-
-                                    <div>
-                                        <strong>
-                                            @item.MaPhieu
-                                        </strong>
-
-                                        <small>
-                                            Phiếu bán hàng
-                                        </small>
-                                    </div>
-
-                                </div>
-                            </td>
-
-
-                            <!-- CUSTOMER -->
-                            <td>
-                                @if (!string.IsNullOrWhiteSpace(item.MaKhachHang))
-                                {
-                                    <span class="invoice-code">
-                                        @item.MaKhachHang
-                                    </span>
-                                }
-                                else
-                                {
-                                    <span class="invoice-empty">
-                                        Không có
-                                    </span>
-                                }
-                            </td>
-
-
-                            <!-- CARD -->
-                            <td>
-                                @if (!string.IsNullOrWhiteSpace(item.MaThe))
-                                {
-                                    <span class="invoice-code">
-                                        @item.MaThe
-                                    </span>
-                                }
-                                else
-                                {
-                                    <span class="invoice-empty">
-                                        Không có
-                                    </span>
-                                }
-                            </td>
-
-
-                            <!-- EMPLOYEE -->
-                            <td>
-                                @if (!string.IsNullOrWhiteSpace(item.MaNhanVien))
-                                {
-                                    <span class="invoice-code">
-                                        @item.MaNhanVien
-                                    </span>
-                                }
-                                else
-                                {
-                                    <span class="invoice-empty">
-                                        Không có
-                                    </span>
-                                }
-                            </td>
-
-
-                            <!-- DATE -->
-                            <td>
-                                <span class="invoice-date">
-                                    @item.NgayTao.ToString("dd/MM/yyyy")
-                                </span>
-
-                                <small class="invoice-time">
-                                    @item.NgayTao.ToString("HH:mm")
-                                </small>
-                            </td>
-
-
-                            <!-- STATUS -->
-                            <td>
-
-                                @if (item.TrangThai == true)
-                                {
-                                    <span class="invoice-status status-completed">
-                                        <span></span>
-                                        Hoàn thành
-                                    </span>
-                                }
-                                else
-                                {
-                                    <span class="invoice-status status-pending">
-                                        <span></span>
-                                        Chưa hoàn thành
-                                    </span>
-                                }
-
-                            </td>
-
-
-                            <!-- ACTIONS -->
-                            <td>
-
-                                <div class="invoice-actions">
-
-                                    <a asp-action="Details"
-                                       asp-route-maphieu="@item.MaPhieu"
-                                       class="invoice-action invoice-view">
-                                        Xem
-                                    </a>
-
-                                    <a asp-action="Edit"
-                                       asp-route-maphieu="@item.MaPhieu"
-                                       class="invoice-action invoice-edit">
-                                        Sửa
-                                    </a>
-
-                                    <a asp-action="Delete"
-                                       asp-route-maphieu="@item.MaPhieu"
-                                       class="invoice-action invoice-delete">
-                                        Xóa
-                                    </a>
-
-                                </div>
-
-                            </td>
-
-                        </tr>
-                    }
-
-                </tbody>
-
-            </table>
-
-        </div>
-
+        }
+        else
+        {
+            <div class="empty-state">
+                <i class="bi bi-receipt"></i>
+                <h4>Chưa có phiếu bán</h4>
+                <p>Hãy tạo phiếu bán đầu tiên.</p>
+                <a asp-action="Create" class="btn btn-primary">
+                    <i class="bi bi-plus-lg"></i>
+                    Tạo phiếu bán
+                </a>
+            </div>
+        }
     </div>
 
 </div>
-```
+
+@section Scripts
+{
+    <script>
+        document.getElementById("txtTimKiem")?.addEventListener("keyup", function () {
+            let tuKhoa = this.value;
+            fetch("/PhieuBanHangs/TimKiem?timkiem=" + encodeURIComponent(tuKhoa))
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById("ketQuaTimKiem").innerHTML = html;
+                });
+        });
+    </script>
+}

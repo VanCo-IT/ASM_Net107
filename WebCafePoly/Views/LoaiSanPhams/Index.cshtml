@@ -4,128 +4,114 @@
     ViewData["Title"] = "Quản lý loại sản phẩm";
 }
 
-<div class="category-admin-page">
+<div class="product-admin-page">
 
     <!-- HEADER -->
-    <div class="category-page-header">
-
-        <div>
-            <div class="page-breadcrumb">
-                <span>Quản trị</span>
-                <span>/</span>
-                <strong>Loại sản phẩm</strong>
-            </div>
-
+    <div class="page-header">
+        <div class="page-header-content">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a asp-controller="Home" asp-action="Index">Quản trị</a>
+                <span class="separator"><i class="bi bi-chevron-right"></i></span>
+                <span class="current">Loại sản phẩm</span>
+            </nav>
             <h1>Quản lý loại sản phẩm</h1>
-
-            <p>
-                Quản lý các nhóm sản phẩm đang được sử dụng trong quán.
-            </p>
+            <p>Quản lý các danh mục sản phẩm của quán.</p>
         </div>
-
-        <a asp-action="Create" class="btn btn-add-category">
-            <span>＋</span>
-            Thêm loại sản phẩm
-        </a>
-
+        <div class="page-actions">
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i>
+                Thêm loại
+            </a>
+        </div>
     </div>
 
-
-    <!-- SUMMARY -->
-    <div class="category-summary">
-
-        <div class="category-summary-icon">
-            ☕
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+        <div class="toolbar-left">
+            <div class="search-box">
+                <i class="bi bi-search search-icon"></i>
+                <input type="text"
+                       id="txtTimKiem"
+                       class="form-control"
+                       placeholder="Tìm kiếm theo tên loại..." />
+            </div>
         </div>
-
-        <div>
-            <span>Tổng số loại</span>
-            <strong>@Model.Count()</strong>
+        <div class="toolbar-right">
+            <div class="toolbar-count">
+                <span>Danh sách loại sản phẩm</span>
+            </div>
         </div>
-
     </div>
 
-
-    <!-- CATEGORY GRID -->
-    <div class="category-grid">
-
-        @foreach (var item in Model)
+    <!-- GRID -->
+    <div id="ketQuaTimKiem">
+        @if (Model.Any())
         {
-            <div class="category-card">
-
-                <div class="category-card-top">
-
-                    <div class="category-icon">
-                        ☕
+            <div class="row g-4">
+                @foreach (var item in Model)
+                {
+                    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div class="stat-icon primary">
+                                        <i class="bi bi-tag-fill"></i>
+                                    </div>
+                                    <span class="badge bg-light text-dark">@item.MaLoai</span>
+                                </div>
+                                <h5 class="card-title mb-2">@item.TenLoai</h5>
+                                <p class="card-text text-muted small mb-3">
+                                    @(string.IsNullOrEmpty(item.GhiChu) ? "Không có ghi chú" : item.GhiChu)
+                                </p>
+                                <div class="d-flex gap-2">
+                                    <a asp-action="Details"
+                                       asp-route-maloai="@item.MaLoai"
+                                       class="btn btn-sm btn-outline flex-fill">
+                                        <i class="bi bi-eye"></i> Xem
+                                    </a>
+                                    <a asp-action="Edit"
+                                       asp-route-maloai="@item.MaLoai"
+                                       class="btn btn-sm btn-warning flex-fill">
+                                        <i class="bi bi-pencil"></i> Sửa
+                                    </a>
+                                    <a asp-action="Delete"
+                                       asp-route-maloai="@item.MaLoai"
+                                       class="btn btn-sm btn-danger flex-fill">
+                                        <i class="bi bi-trash"></i> Xóa
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="category-code">
-                        @item.MaLoai
-                    </div>
-
-                </div>
-
-
-                <div class="category-card-content">
-
-                    <h3>
-                        @item.TenLoai
-                    </h3>
-
-                    @if (!string.IsNullOrWhiteSpace(item.GhiChu))
-                    {
-                        <p>
-                            @item.GhiChu
-                        </p>
-                    }
-                    else
-                    {
-                        <p class="category-empty">
-                            Chưa có ghi chú
-                        </p>
-                    }
-
-                </div>
-
-
-                <div class="category-product-count">
-
-                    <span>
-                        Sản phẩm
-                    </span>
-
-                    <strong>
-                        @(item.SanPhams?.Count ?? 0)
-                    </strong>
-
-                </div>
-
-
-                <div class="category-card-actions">
-
-                    <a asp-action="Details"
-                       asp-route-maloai="@item.MaLoai"
-                       class="category-action category-view">
-                        Xem
-                    </a>
-
-                    <a asp-action="Edit"
-                       asp-route-maloai="@item.MaLoai"
-                       class="category-action category-edit">
-                        Sửa
-                    </a>
-
-                    <a asp-action="Delete"
-                       asp-route-maloai="@item.MaLoai"
-                       class="category-action category-delete">
-                        Xóa
-                    </a>
-
-                </div>
-
+                }
             </div>
         }
-
+        else
+        {
+            <div class="empty-state">
+                <i class="bi bi-grid"></i>
+                <h4>Chưa có loại sản phẩm</h4>
+                <p>Hãy thêm loại sản phẩm đầu tiên để phân loại món.</p>
+                <a asp-action="Create" class="btn btn-primary">
+                    <i class="bi bi-plus-lg"></i>
+                    Thêm loại sản phẩm
+                </a>
+            </div>
+        }
     </div>
 
 </div>
+
+@section Scripts
+{
+    <script>
+        document.getElementById("txtTimKiem")?.addEventListener("keyup", function () {
+            let tuKhoa = this.value;
+            fetch("/LoaiSanPhams/TimKiem?timkiem=" + encodeURIComponent(tuKhoa))
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById("ketQuaTimKiem").innerHTML = html;
+                });
+        });
+    </script>
+}
